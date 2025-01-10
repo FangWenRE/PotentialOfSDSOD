@@ -26,7 +26,7 @@ it includes:
 
 # 2. Main
 After you download the data from the first step, please place it in the `dataset` directory as illustrated below.
-
+Simple-Images-d1 is renamed as SimpleImages/simple1, Simple-Images-d2 is saved at SimpleImages/simple2, Complex-Images is saev ComplexImages
 ```shell script
 dataset:
     - SimpleImages
@@ -44,7 +44,7 @@ bash script.sh
 ```
 We also provide the `train_test.sh` script for single-run training and evaluation.
 ```shell script
-bash script.sh maxsum res 2 dataset/DUTS-TR
+bash script.sh maxsum res 0 dataset/DUTS-TR
 ```
 # 3. Results
 ![Table1](imgs/table1.PNG)
