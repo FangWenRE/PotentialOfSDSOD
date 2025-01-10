@@ -1,5 +1,5 @@
 # Potential of Diffusion-Generated Data on Salient Object Detection
-
+![Framework](imgs/framework.PNG)
 # 1. Resource
 ## eval dataset
 * Download the ECSSD from [Here](https://www.cse.cuhk.edu.hk/leojia/projects/hsaliency/dataset.html)
@@ -23,7 +23,34 @@ it includes:
 4. the weights of the model (also includes the weight trained under the DUTS-TR dataset)
 5. the saliency maps
 
-# 2. Train & Test
 
+# 2. Main
+After you download the data from the first step, please place it in the `dataset` directory as illustrated below.
+
+```shell script
+dataset:
+    - SimpleImages
+        - simple1
+        - simple2
+    - ComplexImages
+        - image
+    
+    - ECSSD
+    - ...
+```
+After preparing the data, you can directly run the `script.sh` script to generate pseudo-labels and train the network model simultaneously.
+```shell script
+bash script.sh
+```
+We also provide the `train_test.sh` script for single-run training and evaluation.
+```shell script
+bash script.sh maxsum res 2 dataset/DUTS-TR
+```
 # 3. Results
+![Table1](imgs/table1.PNG)
 
+
+![Table2](imgs/table2.PNG)
+
+# 4. Acknowledgments
+Our code was built upon [A2S-v2](https://github.com/moothes/A2S-v2.git), and we thank them for their excellent work.
