@@ -1,3 +1,5 @@
+mkdir -p logs/labels logs/training
+
 d1="simple1"
 d2="simple2"
 
