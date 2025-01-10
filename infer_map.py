@@ -15,28 +15,32 @@ from utils.data_loader import InferRGB
 from process.mask_utils import morphology
 from thop import profile
 
+
 def get_arguments():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-gpu', type=str, default='cuda:3')
     parser.add_argument('-input_size', type=int, default=320)
-    parser.add_argument('-image_path', type=str, default='/opt/A2S-v2/dataset/AND/image')
-    parser.add_argument('-save_dir',   type=str, default='/opt/A2S-v2/dataset/infer_test')
-    parser.add_argument('-load_path', type=str,  default='weight/*2stage_batch12/best.pth')
+    parser.add_argument('-image_path', type=str, help="the jpg image path")
+    parser.add_argument('-save_dir', type=str, help="the png mask save path")
+    parser.add_argument('-load_path', type=str, help="model weight path")
     return parser.parse_args()
+
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters())
+
 
 def save_png(prob_pred, shape, save_path):
     pred = prob_pred.sigmoid().cpu().data.numpy()[0]
     pred = np.clip(np.round(cv2.resize(pred, shape) * 255) / 255.0, 0, 1)
     Image.fromarray((pred * 255)).convert('L').save(save_path)
 
+
 def main(args):
     encoder = resnet()
     fl = [64, 256, 512, 1024, 2048]
-    model = Network(1,encoder=encoder, feat=fl)
+    model = Network(1, encoder=encoder, feat=fl)
     model.load_state_dict(torch.load(args.load_path, map_location="cpu"), strict=True)
 
     model.to(args.gpu)
@@ -48,23 +52,24 @@ def main(args):
     if not os.path.exists(save_dir): os.makedirs(save_dir)
 
     ctx = torch.multiprocessing.get_context("spawn")
-    pool = ctx.Pool(processes=os.cpu_count()//2)
+    pool = ctx.Pool(processes=os.cpu_count() // 2)
     model.eval()
     with torch.no_grad():
         for sample_batched in tqdm(testloader):
             name, size = sample_batched['name'], sample_batched['size']
-            
+
             inputs = sample_batched['image'].clone().detach().to(dtype=torch.float32).to(args.gpu)
 
             Y = model(inputs)
             preds = Y["final"]
             for i in range(preds.size(0)):
                 shape = (768, 768)
-                save_path = os.path.join(save_dir, name[i].replace("jpg","png"))
+                save_path = os.path.join(save_dir, name[i].replace("jpg", "png"))
                 # save_png(preds[i], shape, save_path)
                 pool.apply_async(save_png, (preds[i], shape, save_path))
     pool.close()
-    pool.join()       
+    pool.join()
+
 
 if __name__ == '__main__':
     args = get_arguments()
