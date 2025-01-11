@@ -25,8 +25,25 @@ it includes:
 
 
 # 2. Main
+
+## Install
+This code was implemented and tested with python 3.8, PyTorch 2.1.1 and CUDA 12.1.
+Please install [Pytorch](https://pytorch.org/). In order to install the additionnal dependencies, please launch the following command:
+```shell script
+# Create conda environment
+conda create -n posod python=3.8
+conda activate posod
+
+# Example of pytorch installation
+conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+
+# Install dependencies
+pip install -r requirements.txt
+```
+## Run
 After you download the data from the first step, please place it in the `dataset` directory as illustrated below.
-Simple-Images-d1 is renamed as SimpleImages/simple1, Simple-Images-d2 is saved at SimpleImages/simple2, Complex-Images is saev ComplexImages
+Simple-Images-d1 is saved at SimpleImages/simple1, Simple-Images-d2 is saved at SimpleImages/simple2, and Complex-Images is saved at ComplexImages/image.
+
 ```shell script
 dataset:
     - SimpleImages
@@ -46,6 +63,7 @@ We also provide the `train_test.sh` script for single-run training and evaluatio
 ```shell script
 bash script.sh maxsum res 0 dataset/DUTS-TR
 ```
+
 # 3. Results
 ![Table1](imgs/table1.PNG)
 

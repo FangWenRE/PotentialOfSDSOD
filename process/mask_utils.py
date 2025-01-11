@@ -13,8 +13,8 @@ def get_arguments():
     parser.add_argument('--morphology_kernal', type=int, default=5, help="the threshold parameter of morphology()")
     parser.add_argument('--th_miniSm', type=float, default=0.001, help="the parameter of min area sm")
     
-    parser.add_argument('--input_path', type=str, default='/opt/A2S-v2/dataset/Image/257clsV1')
-    parser.add_argument('--output_path', type=str, default='/opt/A2S-v2/dataset/Simple/simple1_099')
+    parser.add_argument('--input_path', type=str, default='')
+    parser.add_argument('--output_path', type=str, default='')
     
     # complex image settings
     parser.add_argument('--cinfer_target', type=str, default='infer')
@@ -27,7 +27,7 @@ def get_arguments():
     parser.add_argument('--sth_nms', type=float, default=0.8, help="the parameter of mutil mask nms")
     parser.add_argument('--sth_clsProb1', type=float, default=0, help="the parameter of class probability")
     parser.add_argument('--sth_clsProb2', type=float, default=0.7, help="the parameter of strict class probability")
-    parser.add_argument('--sth_maskIou', type=float, default=0.7, help="the parameter of mask iou")
+    parser.add_argument('--sth_maskIou', type=float, default=0.9, help="the parameter of mask iou")
 
     return parser.parse_args()
 

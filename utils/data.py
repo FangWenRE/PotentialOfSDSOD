@@ -41,8 +41,8 @@ def get_color_list(name, config, phase):
         img_list = os.listdir(image_root)
         print('Using pseudo labels from {}'.format(gt_root))
     else:
-        image_root = f"/data/data/{name}/image"
-        gt_root = f"/data/data/{name}/mask"
+        image_root = f"dataset/{name}/image"
+        gt_root = f"dataset/{name}/mask"
         img_list = os.listdir(image_root)
         
     
