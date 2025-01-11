@@ -1,4 +1,5 @@
 clip==1.0
+diffusers==0.32.1
 matplotlib==3.7.1
 numpy==1.24.4
 open_clip_torch==2.20.0
