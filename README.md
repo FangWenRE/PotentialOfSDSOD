@@ -42,7 +42,8 @@ pip install -r requirements.txt
 ```
 ## Run
 After you download the data from the first step, please place it in the `dataset` directory as illustrated below.
-Simple-Images-d1 is saved at SimpleImages/simple1, Simple-Images-d2 is saved at SimpleImages/simple2, and Complex-Images is saved at ComplexImages/image.
+
+Simple-Images-d1 is saved at `SimpleImages/simple1`, Simple-Images-d2 is saved at `SimpleImages/simple2`, and Complex-Images is saved at `ComplexImages/image`.
 
 ```shell script
 dataset:
@@ -61,7 +62,7 @@ bash script.sh
 ```
 We also provide the `train_test.sh` script for single-run training and evaluation.
 ```shell script
-bash script.sh maxsum res 0 dataset/DUTS-TR
+bash train_test.sh maxsum res 0 dataset/DUTS-TR
 ```
 
 # 3. Results
