@@ -192,18 +192,18 @@ def main(config):
     if not os.path.exists(out_mask_path): os.makedirs(out_mask_path)
 
     files = os.listdir(images_path)
-    length = len(files) // 2
+    tar_len = len(files)
     start_time = time.time()
-    for index, image_name in enumerate(files[6190:6217]):
+    for index, image_name in enumerate(files):
         match = re.search(r"([a-zA-Z-\s]+)\d+\.jpg", image_name)
         cls_name = match.group(1).strip() if match else "other"
-        print("-" * 20, f"{index}/{length}", image_name, cls_name, "-" * 20)
+        print("-" * 20, f"{index}/{tar_len}", image_name, cls_name, "-" * 20)
 
         png_name = image_name.replace("jpg", "png")
 
         file_path = os.path.join(images_path, image_name)
         res = process(config, file_path, cls_name)
-        if res:
+        if res is not None:
             cv2.imwrite(os.path.join(out_mask_path, png_name), res * 255)
             shutil.copy(file_path, os.path.join(out_image_path, image_name))
     end_time = time.time()

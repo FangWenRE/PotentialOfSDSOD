@@ -39,11 +39,10 @@ python infer_map.py --image_path="/opt/PolienofSOD/dataset/ComplexImages/image"\
 python infer_map.py --image_path="/opt/PolienofSOD/dataset/ComplexImages/image"\
                     --save_dir="/opt/PolienofSOD/dataset/ComplexImages/v2infer"\
                     --load_path="/opt/PolienofSOD/weight/$d2/best.pth"
-wait
-
 
 # Take the union of the inference maps of models d1 and d2 on complex images.
 python process/uion_d1d2.py --path="/opt/PolienofSOD/dataset/ComplexImages"
+
 wait
 
 #============= 4 ==============
@@ -51,7 +50,7 @@ wait
 r1=refinedr1
 refinedr1_save_path="/opt/PolienofSOD/dataset/Complexities/$r1"
 nohup python -u process/generate_complex_mask.py --gpu="cuda:0"\
-                                                 --input_path="/opt/PolienofSOD/dataset/ComplexImages/image"\
+                                                 --input_path="/opt/PolienofSOD/dataset/ComplexImages"\
                                                  --output_path=$refinedr1_save_path\
                                                  --cinfer_target="v12infer"\
                                                   > "./logs/labels/$r1.log" 2>&1 &
@@ -73,7 +72,7 @@ wait
 r2=refinedr2
 refinedr2_save_path="/opt/PolienofSOD/dataset/Complexities/$r2"
 nohup python -u process/generate_complex_mask.py --gpu="cuda:0"\
-                                                 --input_path="/opt/PolienofSOD/dataset/ComplexImages/image"\
+                                                 --input_path="/opt/PolienofSOD/dataset/ComplexImages"\
                                                  --output_path=$refinedr2_save_path\
                                                  --cinfer_target="r1infer"\
                                                   > "./logs/labels/$r2.log" 2>&1 &

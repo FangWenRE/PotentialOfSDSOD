@@ -19,11 +19,11 @@ from thop import profile
 def get_arguments():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-gpu', type=str, default='cuda:3')
-    parser.add_argument('-input_size', type=int, default=320)
-    parser.add_argument('-image_path', type=str, help="the jpg image path")
-    parser.add_argument('-save_dir', type=str, help="the png mask save path")
-    parser.add_argument('-load_path', type=str, help="model weight path")
+    parser.add_argument('--gpu', type=str, default='cuda:0')
+    parser.add_argument('--input_size', type=int, default=320)
+    parser.add_argument('--image_path', type=str, help="the jpg image path")
+    parser.add_argument('--save_dir', type=str, help="the png mask save path")
+    parser.add_argument('--load_path', type=str, help="model weight path")
     return parser.parse_args()
 
 
@@ -57,13 +57,14 @@ def main(args):
     with torch.no_grad():
         for sample_batched in tqdm(testloader):
             name, size = sample_batched['name'], sample_batched['size']
+            img_shapes = [(b.item(), a.item()) for a, b in zip(size[0], size[1])]
 
             inputs = sample_batched['image'].clone().detach().to(dtype=torch.float32).to(args.gpu)
 
             Y = model(inputs)
             preds = Y["final"]
             for i in range(preds.size(0)):
-                shape = (768, 768)
+                shape = img_shapes[i]
                 save_path = os.path.join(save_dir, name[i].replace("jpg", "png"))
                 # save_png(preds[i], shape, save_path)
                 pool.apply_async(save_png, (preds[i], shape, save_path))

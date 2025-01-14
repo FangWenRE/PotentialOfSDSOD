@@ -67,8 +67,8 @@ def main(config):
     if not os.path.exists(out_image_path): os.makedirs(out_image_path)
     if not os.path.exists(out_mask_path): os.makedirs(out_mask_path)
 
-    tar_len = len(images) // 2
-    for index, image_name in enumerate(images[tar_len:], start=1):
+    tar_len = len(images)
+    for index, image_name in enumerate(images, start=1):
         print(f"{index}/{tar_len}, {image_name}")
         png_name = image_name.replace(".jpg", ".png")
         
