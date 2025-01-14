@@ -4,7 +4,7 @@
 ## eval dataset
 * Download the ECSSD from [Here](https://www.cse.cuhk.edu.hk/leojia/projects/hsaliency/dataset.html)
 * Download the DUTS-TR and DUTS-TE from [Here](http://saliencydetection.net/duts/#org3aad434).
-* Download the HKU-IS from [Here](https://sites.google.com/site/ligb86/hkuis).
+* Download the HKU-IS from [Here](http://i.cs.hku.hk/~gbli/deep_saliency.html).
 * Download the DUT-OMRON from [Here](http://saliencydetection.net/dut-omron/#org96c3bab)
 * Download the PASCAL-S from [Baidu Drive](https://pan.baidu.com/s/1-CG3japmh1FrpZKjPFmTgQ?pwd=uf4t) [passeword: uf4t] or [Google Drive](https://drive.google.com/file/d/1MupxajLPXRack-GenraBEhSlKWeRs1M7/view?usp=drive_link)
 
@@ -60,7 +60,7 @@ After preparing the data, you can directly run the `script.sh` script to generat
 ```shell script
 bash script.sh
 ```
-We also provide the `train_test.sh` script for single-run training and evaluation.
+We also provide the `train_test.sh` script for training and evaluation.
 ```shell script
 bash train_test.sh maxsum res 0 dataset/DUTS-TR
 ```
