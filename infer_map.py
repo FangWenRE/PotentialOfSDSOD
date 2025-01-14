@@ -71,7 +71,6 @@ def main(args):
     pool.close()
     pool.join()
 
-
 if __name__ == '__main__':
     args = get_arguments()
     main(args)

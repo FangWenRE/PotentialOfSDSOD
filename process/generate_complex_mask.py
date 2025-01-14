@@ -80,6 +80,7 @@ def main(config):
         
         process(config, models, image_path, infer_path, out_image_path_, out_mask_path_)
 
+
 if __name__ == "__main__":
     config = get_arguments()
     print(config)

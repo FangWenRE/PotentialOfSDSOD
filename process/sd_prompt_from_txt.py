@@ -26,7 +26,6 @@ def get_prompts(txt_path):
     with open(txt_path) as f:
         lines = list(filter(lambda x:len(x)>1, f.readlines()))
     return lines
-            
 
 if __name__ == '__main__':
     device = "cuda:0"

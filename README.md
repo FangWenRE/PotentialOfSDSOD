@@ -56,6 +56,7 @@ dataset:
     - DUTS-TE
     - ...
 ```
+
 After preparing the data, you can directly run the `script.sh` script to generate pseudo-labels and train the network model simultaneously.
 ```shell script
 bash script.sh
