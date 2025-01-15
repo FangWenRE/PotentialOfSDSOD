@@ -1,13 +1,13 @@
 import sys
 
 import cv2
+import torch
 from math import exp
 from tqdm import trange
 from progress.bar import Bar
 from utils.util import *
 from utils.data import Train_Dataset, Test_Dataset, get_loader, get_test_list
 from test import test_model
-import torch
 from torch.nn import utils
 from base.framework_factory import load_framework
 from utils.util import label_edge_prediction, seed_everything

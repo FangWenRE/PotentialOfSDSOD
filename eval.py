@@ -8,10 +8,12 @@ import argparse
 from utils.data import *
 from utils.metric import *
 
+
 # python3 eval.py  --sm_path=""
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--sm_path', default='SM/*2stage_batch12', help='The saliency map path is inferred by the trained model')
+    parser.add_argument('--sm_path', default='SM/*2stage_batch12',
+                        help='The saliency map path is inferred by the trained model')
     params = parser.parse_args()
     config = vars(params)
     config['orig_size'] = True
@@ -24,7 +26,7 @@ def main():
         if not os.path.exists(mask_path):
             print('{} not exists!!!!!'.format(mask_path))
             continue
-        
+
         titer = test_set.size
         MR = MetricRecorder(titer)
         test_bar = Bar('{}'.format(set_name), max=titer)
@@ -37,14 +39,15 @@ def main():
             pred = Image.open(os.path.join(mask_path, f"{name}.png")).convert('L')
             out_shape = gt.shape
             pred = np.array(pred.resize((out_shape[::-1])))
-            
+
             pred, gt = normalize_pil(pred, gt)
-            MR.update(pre=pred, gt=gt)    
+            MR.update(pre=pred, gt=gt)
             Bar.suffix = '{}/{}'.format(j, titer)
             test_bar.next()
 
         mae, (maxf, meanf, *_), sm, em, wfm = MR.show(bit_num=3)
         print('\nMax-F: {}, MAE: {}, Maen-F: {}, Fbw: {},  SM: {}, EM: {}.'.format(maxf, mae, meanf, wfm, sm, em))
+
 
 if __name__ == "__main__":
     main()

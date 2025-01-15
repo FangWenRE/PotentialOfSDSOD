@@ -1,10 +1,6 @@
 import numpy as np
 from scipy.ndimage import center_of_mass, convolve, distance_transform_edt as bwdist
 
-#import matplotlib.pyplot as plt
-
-
-
 class MetricRecorder:
     def __init__(self, eval_length_for_fm, beta_for_wfm=1):
         self.mae = cal_mae()
@@ -36,6 +32,7 @@ class MetricRecorder:
         for d in data:
             results.append(round(d, bit_num))
         return results
+
 
 '''
 class CurveDrawer:
@@ -114,6 +111,7 @@ class CurveDrawer:
         plt.show()
 '''
 
+
 def normalize_pil(pre, gt):
     gt = np.asarray(gt)
     pre = np.asarray(pre)
@@ -126,6 +124,7 @@ def normalize_pil(pre, gt):
     else:
         pre = (pre - min_pre) / (max_pre - min_pre)
     return pre, gt
+
 
 class cal_fm(object):
     # Fmeasure(maxFm, meanFm)---Frequency-tuned salient region detection(CVPR 2009)
@@ -337,9 +336,9 @@ class cal_em(object):
         align_FM = dFM - mu_FM
         align_GT = dGT - mu_GT
         align_Matrix = (
-            2.0
-            * (align_GT * align_FM)
-            / (align_GT * align_GT + align_FM * align_FM + 1e-8)
+                2.0
+                * (align_GT * align_FM)
+                / (align_GT * align_GT + align_FM * align_FM + 1e-8)
         )
         return align_Matrix
 
@@ -379,7 +378,7 @@ class cal_wfm(object):
         fspecial('gaussian',[shape],[sigma])
         """
         m, n = [(ss - 1.0) / 2.0 for ss in shape]
-        y, x = np.ogrid[-m : m + 1, -n : n + 1]
+        y, x = np.ogrid[-m: m + 1, -n: n + 1]
         h = np.exp(-(x * x + y * y) / (2.0 * sigma * sigma))
         h[h < np.finfo(h.dtype).eps * h.max()] = 0
         sumh = h.sum()
@@ -430,5 +429,3 @@ class cal_wfm(object):
 
     def show(self):
         return np.mean(self.scores_list)
-
-

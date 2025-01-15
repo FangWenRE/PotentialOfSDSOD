@@ -209,6 +209,7 @@ def main(config):
     end_time = time.time()
     print(f"{end_time - start_time}秒")
 
+
 if __name__ == "__main__":
     config = get_arguments()
     print(config)
